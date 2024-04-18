@@ -1,25 +1,47 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import { Form } from './components/Form';
+import { TodoList } from './components/TodoList';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+	const [todo, setTodo] = useState([{ title: 'todo', complete: false }]);
+
+	const addTodo = title => {
+		const newTodo = {
+			title,
+			complete: false,
+		};
+
+		setTodo(prevState => [...prevState, newTodo]);
+	};
+
+	const deleteTodo = title => {
+		setTodo(prevState => prevState.filter(e => e.title !== title));
+	};
+
+  const editTodo = (title, newTitle) => {
+    setTodo(prevState => prevState.map(e => {
+      if (e.title === title) {
+        return {
+          ...e,
+          title: newTitle
+        };
+      }
+
+      return e;
+    }));
+  };
+
+	return (
+		<div className='App'>
+			<Form add={addTodo} />
+			<TodoList
+				todo={todo}
+				deleteTodo={deleteTodo}
+        editTodo={editTodo}
+			/>
+		</div>
+	);
 }
 
 export default App;
