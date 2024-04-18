@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-export const TodoList = ({ todo, deleteTodo, editTodo }) => {
+export const TodoList = ({ todo, deleteTodo, editTodo, toggleComplete }) => {
 	const [editedTodo, setEditedTodo] = useState({ id: null, title: '' });
 
 	const handleEdit = (taskId, title) => {
@@ -36,6 +36,7 @@ export const TodoList = ({ todo, deleteTodo, editTodo }) => {
 								{e.title} {e.complete ? 'is-completed ' : 'is-not-completed '}
 								<button onClick={() => deleteTodo(e.title)}>Delete</button>
 								<button onClick={() => handleEdit(e.title, e.title)}>Edit</button>
+								<button onClick={() => toggleComplete(e.title)}>{e.complete ? 'Undone' : 'Done'}</button>
 							</>
 						)}
 					</li>

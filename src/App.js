@@ -19,18 +19,35 @@ function App() {
 		setTodo(prevState => prevState.filter(e => e.title !== title));
 	};
 
-  const editTodo = (title, newTitle) => {
-    setTodo(prevState => prevState.map(e => {
-      if (e.title === title) {
-        return {
-          ...e,
-          title: newTitle
-        };
-      }
+	const editTodo = (title, newTitle) => {
+		setTodo(prevState =>
+			prevState.map(e => {
+				if (e.title === title) {
+					return {
+						...e,
+						title: newTitle,
+					};
+				}
 
-      return e;
-    }));
-  };
+				return e;
+			})
+		);
+	};
+
+	const toggleComplete = title => {
+		setTodo(prevState =>
+			prevState.map(e => {
+				if (e.title === title) {
+					return {
+						...e,
+						complete: !e.complete,
+					};
+				}
+
+				return e;
+			})
+		);
+	};
 
 	return (
 		<div className='App'>
@@ -38,7 +55,8 @@ function App() {
 			<TodoList
 				todo={todo}
 				deleteTodo={deleteTodo}
-        editTodo={editTodo}
+				editTodo={editTodo}
+				toggleComplete={toggleComplete}
 			/>
 		</div>
 	);
