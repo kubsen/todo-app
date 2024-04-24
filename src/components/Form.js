@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { TodoContext } from "../App";
 
-export const Form = ({ add }) => {
+export const Form = () => {
+  const { addTodo } = useContext(TodoContext);
   const [title, setTitle] = useState('');
 
   const handleTitle = ({ target: {value}}) => {
@@ -9,7 +11,7 @@ export const Form = ({ add }) => {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    add(title);
+    addTodo(title);
     setTitle('');
   };
 

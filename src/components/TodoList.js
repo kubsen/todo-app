@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
+import { TodoContext } from '../App';
 
-export const TodoList = ({ todo, deleteTodo, editTodo, toggleComplete }) => {
+export const TodoList = () => {
+	const { todo, deleteTodo, editTodo, toggleComplete } = useContext(TodoContext);
 	const [editedTodo, setEditedTodo] = useState({ id: null, title: '' });
 
 	const handleEdit = (taskId, title) => {
